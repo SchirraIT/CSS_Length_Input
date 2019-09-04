@@ -1,0 +1,37 @@
+<div [id]="id" [formGroup]="cssUnitForm">
+  <mat-form-field>
+    <input matInput type="number" [min]="min" [max]="max" [name]="" placeholder="Length" formControlName="value" [value]="cssUnit.value" (keydown.e)="$event.preventDefault()">
+    <mat-error *ngIf="cssUnitForm.controls.value.hasError('required')">
+      Value is required!
+    </mat-error>
+    <mat-error *ngIf="cssUnitForm.controls.value.hasError('min')">
+      Value must must be higher {{min}}
+    </mat-error>
+    <mat-error *ngIf="cssUnitForm.controls.value.hasError('max')">
+      Value cannot bigger than {{max}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select formControlName="unit" placeholder="Unit" [value]="cssUnit.unit">
+      <mat-option *ngFor="let unit of UNITS" [value]="unit">
+        {{unit}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="cssUnitForm.controls.unit.hasError('required')">
+      Value is required!
+    </mat-error>
+  </mat-form-field>
+
+  <mat-slider *ngIf="slider" thumbLabel [min]="min" [max]="max" formControlName="value" [value]="cssUnit.value"
+              color="primary"></mat-slider>
+</div>
+<pre ng>
+  value: {{value}}
+  cssUnit: {{cssUnit | json}}
+  formValue: {{cssUnitForm.value | json}}
+  formValid: {{cssUnitForm.valid}}
+  slider: {{slider}}
+</pre>
+
+
