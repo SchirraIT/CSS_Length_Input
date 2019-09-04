@@ -11,7 +11,7 @@ class ICssValue {
 @Component({
   selector: 'app-css-length-input',
   templateUrl: './css-length-input.component.html',
-  styleUrls: ['./css-length-input.component.scss'],
+  styleUrls: [],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -98,16 +98,15 @@ export class CssLengthInputComponent implements AfterContentInit, ControlValueAc
   constructor(private formBuilder: FormBuilder) {
     this.cssUnitForm = this.formBuilder.group({
       value: new FormControl(
-        {value: this.cssUnit.value},
+        {value: this.cssUnit.value, disabled: this.disabled},
         []
       ),
       unit: new FormControl(
-        {value: this.cssUnit.unit},
+        {value: this.cssUnit.unit, disabled: this.disabled},
         [Validators.required]
       )
     });
     this.cssUnitForm.valueChanges.subscribe(changes => {
-      console.log('changed detected');
       if (this.cssUnitForm.valid) {
         this.cssUnit = changes as ICssValue;
         this.value = `${this.cssUnit.value}${this.cssUnit.unit}`;
@@ -126,8 +125,8 @@ export class CssLengthInputComponent implements AfterContentInit, ControlValueAc
     this.cssUnitForm.get('value').setValidators(this.validators);
     this.cssUnitForm.get('value').setValue(this.cssUnit.value);
     this.cssUnitForm.get('unit').setValue(this.cssUnit.unit);
-    this.cssUnitForm.get('value').disable(this.disabled);
-    this.cssUnitForm.get('unit').disable(this.disabled);
+    // this.cssUnitForm.get('value').disable(this.disabled);
+    // this.cssUnitForm.get('unit').disable(this.disabled);
   }
 
   registerOnChange(fn) {
@@ -146,7 +145,6 @@ export class CssLengthInputComponent implements AfterContentInit, ControlValueAc
   }
 
   setDisabledState(isDisabled: boolean): void {
-    console.log(isDisabled);
     this.disabled = isDisabled;
   }
 

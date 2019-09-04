@@ -1,13 +1,72 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HelloComponent } from './hello.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MatBadgeModule,
+  MatButtonModule, MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatOptionModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
+  MatSidenavModule, MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule, MatStepperModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatTooltipModule
+} from '@angular/material';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CssLengthInputComponent } from './css-length-input/css-length-input.component';
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule ],
-  declarations: [ AppComponent, HelloComponent ],
-  bootstrap:    [ AppComponent ]
+  declarations: [
+    AppComponent,
+    CssLengthInputComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+
+    FormsModule,
+    ReactiveFormsModule,
+
+    MatToolbarModule,
+    MatListModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatSortModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatMenuModule,
+    MatIconModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatBadgeModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatSidenavModule,
+    MatStepperModule,
+    MatSliderModule,
+
+    MatCardModule,
+
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
