@@ -11,6 +11,9 @@ export class AppComponent {
 
   cssUnit = "16%";
 
+  get cssUnitControl() {
+    return this.cssUnitForm.get('cssUnit')
+  }
   cssUnitForm: FormGroup;
   constructor(private formBuilder: FormBuilder) {
     this.cssUnitForm = this.formBuilder.group({
@@ -21,10 +24,16 @@ export class AppComponent {
     });
     this.cssUnitForm.valueChanges.subscribe(changes => {
       this.cssUnit = changes.cssUnit;
-    })
+    });
+
   }
 
-  get cssUnitControl() {
-    return this.cssUnitForm.get('cssUnit')
+  save() {
+    alert(this.cssUnit);
   }
+
+  updateFormControl(control, event) {
+    this.cssUnitForm.get(control).setErrors({'childInvalid': event});
+  }
+
 }

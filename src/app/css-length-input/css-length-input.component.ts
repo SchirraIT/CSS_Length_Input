@@ -1,6 +1,6 @@
-import {Component, forwardRef, HostBinding, Input, DoCheck, AfterContentInit} from '@angular/core';
+import {Component, forwardRef, HostBinding, Input, Output, DoCheck, AfterContentInit} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
-
+import {EventEmitter} from '@angular/core';
 type unit = 'em' | 'ex' | '%' | 'px' | 'cm' | 'mm' | 'in' | 'pt' | 'pc' | 'ch' | 'rem' | 'vh' | 'vw' | 'vmin' | 'vmax';
 
 class ICssValue {
@@ -9,7 +9,7 @@ class ICssValue {
 }
 
 @Component({
-  selector: 'app-css-length-input',
+  selector: 'sit-css-length-input',
   templateUrl: './css-length-input.component.html',
   styleUrls: [],
   providers: [
@@ -23,6 +23,7 @@ class ICssValue {
 export class CssLengthInputComponent implements AfterContentInit, ControlValueAccessor {
   @HostBinding('attr.id')
   externalId = '';
+  @Output() formControlState: EventEmitter<any> = new EventEmitter();
 
   @Input()
   set id(value: string) {
@@ -51,6 +52,7 @@ export class CssLengthInputComponent implements AfterContentInit, ControlValueAc
     this.cssUnit = this.parseProperty(this.value);
   }
 
+  
   get value() {
     return this._value;
   }
@@ -107,6 +109,7 @@ export class CssLengthInputComponent implements AfterContentInit, ControlValueAc
       )
     });
     this.cssUnitForm.valueChanges.subscribe(changes => {
+      this.formControlState.emit(this.cssUnitForm.valid);
       if (this.cssUnitForm.valid) {
         this.cssUnit = changes as ICssValue;
         this.value = `${this.cssUnit.value}${this.cssUnit.unit}`;
