@@ -1,26 +1,15 @@
 <mat-card>
   <h1>{{title}}</h1>
+  <h2><mat-icon>copyright</mat-icon>&nbsp;Schirra IT</h2>
   <hr>
   <pre>CSS Length Unit: {{cssUnit}}</pre>
 </mat-card>
 
 <mat-card [formGroup]="cssUnitForm">
   <mat-card-title>Reactive Forms Approach</mat-card-title>
-  <app-css-length-input formControlName="cssUnit" [min]="10" [max]="50" [slider]="true"></app-css-length-input>
-  <hr>
-  <pre>
-    Form Status: {{cssUnitForm.status | json}}
-    Form Touched: {{cssUnitForm.touched | json}}
-    Form Pristine: {{cssUnitForm.pristine | json}}
-    Form Valid: {{cssUnitForm.valid | json}}
-    Form Dirty: {{cssUnitForm.dirty | json}}
-  </pre>
-  <hr>
-  <pre>
-    FormControl Status: {{cssUnitControl.status | json}}
-    FormControl Touched: {{cssUnitControl.touched | json}}
-    FormControl Pristine: {{cssUnitControl.pristine | json}}
-    FormControl Valid: {{cssUnitControl.valid | json}}
-    FormControl Dirty: {{cssUnitControl.dirty | json}}
-  </pre>
-</mat-card>
+  <sit-css-length-input formControlName="cssUnit" (formControlState)="updateFormControl('cssUnit',$event)" [min]="10" [max]="50" [slider]="true" ></sit-css-length-input>
+
+  <button mat-button color="primary" (click)="save()" [disabled]="cssUnitForm.invalid">Save (Form valid?: {{cssUnitForm.valid}})&nbsp;
+    <mat-icon>save</mat-icon>
+    </button>
+  </mat-card>
